@@ -38,10 +38,12 @@ module.exports = {
     'no-use-before-define': 0,
     'no-underscore-dangle': 0,
     'class-methods-use-this': 0,
+    'max-classes-per-file': 0,
 
     // IMPORT
     'import/no-unresolved': 0,
     'import/prefer-default-export': 0,
     'import/no-extraneous-dependencies': 0,
+    'import/extensions': 0,
   },
 };
