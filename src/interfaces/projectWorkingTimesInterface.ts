@@ -11,7 +11,7 @@ export default interface ProjectWorkingTime {
   dateTo?: string; // DateTo can be undefined
 }
 
-export class ProjectWorkingTimeDto {
+export class ProjectWorkingTimeDTO {
   @IsNumber()
   @IsPositive()
   empID: number;

@@ -1,39 +1,48 @@
 import {
-  Controller,
   Param,
   Body,
   Get,
   Post,
   Put,
   Delete,
+  JsonController,
 } from 'routing-controllers';
+import Container from 'typedi';
 
-@Controller('/employees')
+import { EmployeeService } from '@/services/employeeService';
+import { EmployeeDTO } from '@/interfaces/employeeInterface';
+
+@JsonController('/employees')
 export class EmployeesController {
+  private employeeServiceI = Container.get(EmployeeService);
+
   @Get('/')
   getAll() {
-    // Call Employees Service
-
-    return 'This action returns all employees';
+    const employees = this.employeeServiceI.getAll();
+    return employees;
   }
 
   @Get('/:id')
   getOne(@Param('id') id: number) {
-    return `This action returns employee #${id}`;
+    const employee = this.employeeServiceI.getOne(id);
+    return employee;
   }
 
   @Post('/')
-  post(@Body() employee: any) {
-    return 'Saving employee...';
+  post(@Body() employee: EmployeeDTO) {
+    this.employeeServiceI.create(employee);
+    return 'Employee saved...';
   }
 
   @Put('/:id')
-  put(@Param('id') id: number, @Body() employee: any) {
-    return 'Updating an employee...';
+  put(@Param('id') id: number, @Body() employee: EmployeeDTO) {
+    this.employeeServiceI.update(id, employee);
+    return 'Employee updated...';
   }
 
   @Delete('/:id')
   remove(@Param('id') id: number) {
-    return 'Removing employee...';
+    this.employeeServiceI.delete(id);
+    return 'Employee removed...';
   }
 }

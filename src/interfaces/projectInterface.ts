@@ -3,7 +3,7 @@ import { IsNumber, IsPositive, ValidateNested, IsArray } from 'class-validator';
 import { Type } from 'class-transformer';
 
 import ProjectWorkingTime, {
-  ProjectWorkingTimeDto,
+  ProjectWorkingTimeDTO,
 } from './projectWorkingTimesInterface';
 
 export default interface Project {
@@ -11,13 +11,13 @@ export default interface Project {
   workingTimes: ProjectWorkingTime[];
 }
 
-export class ProjectDto {
+export class ProjectDTO {
   @IsNumber()
   @IsPositive()
   projectID: number;
 
   @IsArray()
   @ValidateNested({ each: true })
-  @Type(() => ProjectWorkingTimeDto)
-  workingTimes: ProjectWorkingTimeDto[];
+  @Type(() => ProjectWorkingTimeDTO)
+  workingTimes: ProjectWorkingTimeDTO[];
 }

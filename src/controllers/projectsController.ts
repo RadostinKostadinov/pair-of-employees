@@ -1,18 +1,16 @@
 import {
-  Controller,
   Param,
   Body,
   Get,
   Post,
   Put,
   Delete,
-  ContentType,
   JsonController,
 } from 'routing-controllers';
 
 import Container from 'typedi';
 import { ProjectService } from '@/services/projectService';
-import { ProjectDto } from '@/interfaces/projectInterface';
+import { ProjectDTO } from '@/interfaces/projectInterface';
 
 @JsonController('/projects')
 export class ProjectsController {
@@ -20,32 +18,31 @@ export class ProjectsController {
 
   @Get('/')
   getAll() {
-    // Call Projects Service
     const projects = this.serviceInstance.getAll();
-
     return projects;
   }
 
   @Get('/:id')
   getOne(@Param('id') id: number) {
-    return `This action returns project #${id}`;
+    const project = this.serviceInstance.getOne(id);
+    return project;
   }
 
   @Post('/')
-  post(@Body({ required: true }) project: ProjectDto) {
+  post(@Body({ required: true }) project: ProjectDTO) {
     this.serviceInstance.create(project);
-    return 'Saving project...';
+    return 'Project saved...';
   }
 
   @Put('/:id')
-  put(@Param('id') id: number, @Body() project: ProjectDto) {
+  put(@Param('id') id: number, @Body() project: ProjectDTO) {
     this.serviceInstance.update(id, project);
-    return 'Updating a project...';
+    return 'Project updated...';
   }
 
   @Delete('/:id')
   remove(@Param('id') id: number) {
     this.serviceInstance.delete(id);
-    return 'Removing project...';
+    return 'Project removed...';
   }
 }

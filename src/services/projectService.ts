@@ -1,28 +1,33 @@
 import { Service } from 'typedi';
 
-import Project, { ProjectDto } from '@/interfaces/projectInterface';
+import Project, { ProjectDTO } from '@/interfaces/projectInterface';
 
 @Service()
 export class ProjectService {
   private projects: Project[] = [];
-
-  //   constructor() {}
 
   getAll() {
     return this.projects;
   }
 
   getOne(id: number) {
-    return this.projects[id];
+    const projectIndex = this.projects.findIndex((p) => p.projectID === id);
+
+    if (projectIndex === -1) {
+      throw new Error(`Project with ID ${id} does not exist`);
+    }
+
+    return this.projects[projectIndex];
   }
 
-  create(project: ProjectDto) {
+  create(project: ProjectDTO) {
     const found = this.projects.find((p) => p.projectID === project.projectID);
 
     if (found) {
       throw new Error(`Project with ID ${project.projectID} already exists`);
     }
 
+    // TODO: Update Employees
     this.projects.push(project);
   }
 
@@ -33,6 +38,7 @@ export class ProjectService {
       throw new Error(`Project with ID ${id} does not exist`);
     }
 
+    // TODO: Update Employees
     Object.assign(selectedProject, project);
   }
 
