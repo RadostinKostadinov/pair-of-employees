@@ -1,10 +1,10 @@
 import { Service } from 'typedi';
 
-import Employee, { EmployeeDTO } from '@/interfaces/employeeInterface';
+import { EmployeeDTO } from '@/interfaces/employeeInterface';
 
 @Service()
 export class EmployeeService {
-  private employees: Employee[] = [];
+  private employees: EmployeeDTO[] = [];
 
   getAll() {
     return this.employees;

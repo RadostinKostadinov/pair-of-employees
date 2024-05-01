@@ -14,35 +14,55 @@ import { ProjectDTO } from '@/interfaces/projectInterface';
 
 @JsonController('/projects')
 export class ProjectsController {
-  private serviceInstance = Container.get(ProjectService);
+  private projectServiceI = Container.get(ProjectService);
 
   @Get('/')
   getAll() {
-    const projects = this.serviceInstance.getAll();
-    return projects;
+    try {
+      const projects = this.projectServiceI.getAll();
+      return projects;
+    } catch (error) {
+      return 'Error occurred while getting projects';
+    }
   }
 
   @Get('/:id')
   getOne(@Param('id') id: number) {
-    const project = this.serviceInstance.getOne(id);
-    return project;
+    try {
+      const project = this.projectServiceI.getOne(id);
+      return project;
+    } catch (error) {
+      return 'Error occurred while getting project';
+    }
   }
 
   @Post('/')
   post(@Body({ required: true }) project: ProjectDTO) {
-    this.serviceInstance.create(project);
-    return 'Project saved...';
+    try {
+      this.projectServiceI.create(project);
+      return 'Project saved...';
+    } catch (error) {
+      return 'Error occurred while saving project';
+    }
   }
 
   @Put('/:id')
   put(@Param('id') id: number, @Body() project: ProjectDTO) {
-    this.serviceInstance.update(id, project);
-    return 'Project updated...';
+    try {
+      this.projectServiceI.update(id, project);
+      return 'Project updated...';
+    } catch (error) {
+      return 'Error occurred while updating project';
+    }
   }
 
   @Delete('/:id')
   remove(@Param('id') id: number) {
-    this.serviceInstance.delete(id);
-    return 'Project removed...';
+    try {
+      this.projectServiceI.delete(id);
+      return 'Project removed...';
+    } catch (error) {
+      return 'Error occurred while deleting project';
+    }
   }
 }

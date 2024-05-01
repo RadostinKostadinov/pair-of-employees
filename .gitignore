@@ -9,6 +9,7 @@ logs/
 .vscode/
 dist
 build
+uploads/
 
 # Logs
 logs

@@ -18,31 +18,51 @@ export class EmployeesController {
 
   @Get('/')
   getAll() {
-    const employees = this.employeeServiceI.getAll();
-    return employees;
+    try {
+      const employees = this.employeeServiceI.getAll();
+      return employees;
+    } catch (error) {
+      return 'Error occurred while getting employees';
+    }
   }
 
   @Get('/:id')
   getOne(@Param('id') id: number) {
-    const employee = this.employeeServiceI.getOne(id);
-    return employee;
+    try {
+      const employee = this.employeeServiceI.getOne(id);
+      return employee;
+    } catch (error) {
+      return 'Error occurred while getting employee';
+    }
   }
 
   @Post('/')
   post(@Body() employee: EmployeeDTO) {
-    this.employeeServiceI.create(employee);
-    return 'Employee saved...';
+    try {
+      this.employeeServiceI.create(employee);
+      return 'Employee saved...';
+    } catch (error) {
+      return 'Error occurred while saving employee';
+    }
   }
 
   @Put('/:id')
   put(@Param('id') id: number, @Body() employee: EmployeeDTO) {
-    this.employeeServiceI.update(id, employee);
-    return 'Employee updated...';
+    try {
+      this.employeeServiceI.update(id, employee);
+      return 'Employee updated...';
+    } catch (error) {
+      return 'Error occurred while updating employee';
+    }
   }
 
   @Delete('/:id')
   remove(@Param('id') id: number) {
-    this.employeeServiceI.delete(id);
-    return 'Employee removed...';
+    try {
+      this.employeeServiceI.delete(id);
+      return 'Employee removed...';
+    } catch (error) {
+      return 'Error occurred while removing employee';
+    }
   }
 }
