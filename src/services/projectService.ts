@@ -1,10 +1,10 @@
 import { Service } from 'typedi';
 
-import Project, { ProjectDTO } from '@/interfaces/projectInterface';
+import { ProjectDTO } from '@/interfaces/projectInterface';
 
 @Service()
 export class ProjectService {
-  private projects: Project[] = [];
+  private projects: ProjectDTO[] = [];
 
   getAll() {
     return this.projects;
@@ -31,7 +31,7 @@ export class ProjectService {
     this.projects.push(project);
   }
 
-  update(id: number, project: Project) {
+  update(id: number, project: ProjectDTO) {
     const selectedProject = this.projects.find((p) => p.projectID === id);
 
     if (!selectedProject) {

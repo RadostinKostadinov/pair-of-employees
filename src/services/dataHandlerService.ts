@@ -23,7 +23,7 @@ export class DataHandlerService {
             {
               empID: parseInt(row.EmpID),
               dateFrom: row.DateFrom,
-              dateTo: row.DateTo ? row.DateTo : undefined,
+              dateTo: row.DateTo === 'undefined' ? undefined : row.DateTo,
             },
           ],
         };

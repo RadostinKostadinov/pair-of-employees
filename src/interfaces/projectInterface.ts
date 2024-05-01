@@ -1,15 +1,7 @@
 import { IsNumber, IsPositive, ValidateNested, IsArray } from 'class-validator';
-
 import { Type } from 'class-transformer';
 
-import ProjectWorkingTime, {
-  ProjectWorkingTimeDTO,
-} from './projectWorkingTimesInterface';
-
-export default interface Project {
-  projectID: number;
-  workingTimes: ProjectWorkingTime[];
-}
+import { ProjectWorkingTimeDTO } from './projectWorkingTimesInterface';
 
 export class ProjectDTO {
   @IsNumber()

@@ -5,21 +5,15 @@ import {
   IsOptional,
 } from 'class-validator';
 
-export default interface ProjectWorkingTime {
-  empID: number;
-  dateFrom: string;
-  dateTo?: string; // DateTo can be undefined
-}
-
 export class ProjectWorkingTimeDTO {
   @IsNumber()
   @IsPositive()
   empID: number;
 
   @IsDateString({ strict: true })
-  dateFrom: string;
+  dateFrom: string | Date;
 
   @IsOptional()
   @IsDateString({ strict: true })
-  dateTo: string | undefined;
+  dateTo: string | Date | undefined;
 }

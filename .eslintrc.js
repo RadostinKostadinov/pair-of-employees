@@ -39,6 +39,7 @@ module.exports = {
     'no-underscore-dangle': 0,
     'class-methods-use-this': 0,
     'max-classes-per-file': 0,
+    'no-continue': 0,
 
     // IMPORT
     'import/no-unresolved': 0,
