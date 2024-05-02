@@ -23,13 +23,14 @@ export default function bruteForceEmployeeBased(projects: ProjectBased[]) {
       // Used only in result object (not necessarily)
       const matchedProjects: number[] = [];
 
+      let workedTogetherTime = 0;
+
       // Projects - Loop through every current employee(i) projects and compare it with the corresponding employee(j) projects
       for (let m = 0; m < employees[i].projects.length; m++) {
         // If the project is already passed, skip it
         if (passedProjects.includes(employees[i].projects[m].projectID)) {
           continue;
         }
-        let projectDuration = 0;
 
         // Get all the times that the current employee(i) worked on the project
         const currentEmployeeWork = employees[i].projects.filter(
@@ -37,7 +38,8 @@ export default function bruteForceEmployeeBased(projects: ProjectBased[]) {
         );
 
         // For each work on the project, compare with the all works of corresponding employee
-        currentEmployeeWork.forEach((p) => {
+        for (let x = 0; x < currentEmployeeWork.length; x++) {
+          const p = currentEmployeeWork[x];
           for (let n = 0; n < employees[j].projects.length; n++) {
             if (p.projectID === employees[j].projects[n].projectID) {
               const d = calculateDuration(
@@ -46,16 +48,16 @@ export default function bruteForceEmployeeBased(projects: ProjectBased[]) {
                 employees[j].projects[n].dateFrom,
                 employees[j].projects[n].dateTo
               );
-              projectDuration += d;
+              workedTogetherTime += d;
               matchedProjects.push(employees[j].projects[n].projectID);
             }
           }
-        });
+        }
 
         passedProjects.push(employees[i].projects[m].projectID);
 
-        if (projectDuration > result.duration) {
-          result.duration = projectDuration;
+        if (workedTogetherTime > result.duration) {
+          result.duration = workedTogetherTime;
           result.employees = [employees[i].empID, employees[j].empID];
           result.projects = [...new Set(matchedProjects)];
         }

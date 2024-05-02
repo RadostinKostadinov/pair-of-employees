@@ -13,10 +13,10 @@ export class SearchService {
       structuredClone(this.projectServiceI.getAll())
     );
 
-    if (projectBased) {
-      const result = bruteForceProjectBased(projectsWithDates);
-      return result;
-    }
+    // if (projectBased) {
+    //   const result = bruteForceProjectBased(projectsWithDates);
+    //   return result;
+    // }
 
     const result = bruteForceEmployeeBased(projectsWithDates);
     return result;
