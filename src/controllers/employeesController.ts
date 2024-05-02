@@ -7,7 +7,9 @@ import {
   Delete,
   JsonController,
   Authorized,
+  Res,
 } from 'routing-controllers';
+import { Response } from 'express';
 import Container from 'typedi';
 
 import { EmployeeService } from '@/services/employeeService';
@@ -29,12 +31,16 @@ export class EmployeesController {
   }
 
   @Get('/:id')
-  getOne(@Param('id') id: number) {
+  getOne(@Param('id') id: number, @Res() response: Response) {
     try {
       const employee = this.employeeServiceI.getOne(id);
       return employee;
-    } catch (error) {
-      return 'Error occurred while getting employee';
+    } catch (error: any) {
+      if (error.message.includes('does not exist')) {
+        return response.status(404).json(error.message);
+      }
+
+      return response.status(500).json('Error occurred while getting employee');
     }
   }
 
@@ -59,12 +65,18 @@ export class EmployeesController {
   }
 
   @Delete('/:id')
-  remove(@Param('id') id: number) {
+  remove(@Param('id') id: number, @Res() response: Response) {
     try {
       this.employeeServiceI.delete(id);
       return 'Employee removed...';
-    } catch (error) {
-      return 'Error occurred while removing employee';
+    } catch (error: any) {
+      if (error.message.includes('does not exist')) {
+        return response.status(404).json(error.message);
+      }
+
+      return response
+        .status(500)
+        .json('Error occurred while removing employee');
     }
   }
 }
