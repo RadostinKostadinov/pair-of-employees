@@ -1,9 +1,11 @@
-import Project from '@/interfaces/projectInterface';
-import { rowDataStructure } from '@/types/search';
+import {
+  ProjectBased,
+  csvDataStructure,
+} from '@/interfaces/dataStructureInterfaces';
 
-export function transformToRows(projects: Project[]) {
+export function transformToRows(projects: ProjectBased[]) {
   const rowDataStructure = projects.reduce(
-    (acc: rowDataStructure[], project) => {
+    (acc: csvDataStructure[], project) => {
       const { projectID, workingTimes } = project;
       const projectRows = workingTimes.map((row) => ({
         projectID,

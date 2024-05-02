@@ -1,7 +1,9 @@
-import { EmployeeBased } from '@/interfaces/dataStructureInterfaces';
-import { rowDataStructure } from '@/types/search';
+import {
+  EmployeeBased,
+  csvDataStructure,
+} from '@/interfaces/dataStructureInterfaces';
 
-export default function transformToEmployees(rows: rowDataStructure[]) {
+export default function transformToEmployees(rows: csvDataStructure[]) {
   const employees = new Map();
   rows.forEach((row) => {
     const { projectID, empID, dateFrom, dateTo } = row;

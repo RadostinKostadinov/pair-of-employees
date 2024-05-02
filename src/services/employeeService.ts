@@ -1,6 +1,6 @@
 import { Service } from 'typedi';
 
-import { EmployeeDTO } from '@/interfaces/employeeInterface';
+import { EmployeeDTO } from '@/interfaces/dtos/employeeDTO';
 
 @Service()
 export class EmployeeService {
@@ -48,5 +48,25 @@ export class EmployeeService {
     }
 
     this.employees.splice(employeeIndex, 1);
+  }
+
+  isEmployeeExist(id: number) {
+    return this.employees.some((e) => e.empID === id);
+  }
+
+  assignEmployeeToProject(empID: number, projectID: number) {
+    const employeeIndex = this.employees.findIndex((e) => e.empID === empID);
+
+    if (employeeIndex === -1) {
+      throw new Error(`Employee with ID ${empID} does not exist`);
+    }
+
+    const projectIndex = this.employees[employeeIndex].projects.findIndex(
+      (p) => p === projectID
+    );
+
+    if (projectIndex === -1) {
+      this.employees[employeeIndex].projects.push(projectID);
+    }
   }
 }

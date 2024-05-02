@@ -1,10 +1,16 @@
-import { Post, JsonController, UploadedFile } from 'routing-controllers';
+import {
+  Post,
+  JsonController,
+  UploadedFile,
+  Authorized,
+} from 'routing-controllers';
 import Container from 'typedi';
 
 import { csvFileUploadOptions } from '@/config/multer';
 import { DataHandlerService } from '@/services/dataHandlerService';
 
 @JsonController('/data-handler')
+@Authorized()
 export class dataHandlerController {
   private dataHandlerServiceI = Container.get(DataHandlerService);
 

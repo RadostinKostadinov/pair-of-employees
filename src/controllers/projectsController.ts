@@ -6,13 +6,15 @@ import {
   Put,
   Delete,
   JsonController,
+  Authorized,
 } from 'routing-controllers';
 
 import Container from 'typedi';
 import { ProjectService } from '@/services/projectService';
-import { ProjectDTO } from '@/interfaces/projectInterface';
+import { ProjectDTO } from '@/interfaces/dtos/projectDTO';
 
 @JsonController('/projects')
+@Authorized()
 export class ProjectsController {
   private projectServiceI = Container.get(ProjectService);
 

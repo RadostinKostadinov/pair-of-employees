@@ -1,8 +1,8 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "target": "es2017",
-    "lib": ["es2017", "esnext.asynciterable"],
+    "target": "ES2022",
+    "lib": ["ES2022"],
     "strict": true,
     "strictPropertyInitialization": false,
     "typeRoots": ["node_modules/@types"],
@@ -15,7 +15,7 @@
     "pretty": true,
     "sourceMap": true,
     "declaration": true,
-    "outDir": "dist",
+    "outDir": "build",
     "allowJs": true,
     "noEmit": false,
     "esModuleInterop": true,
@@ -26,11 +26,6 @@
       "@/*": ["*"]
     }
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.json",
-    ".env",
-    "src/database/sql/database.js"
-  ],
-  "exclude": ["node_modules", "src/http", "src/logs"]
+  "include": ["src/**/*.ts", ".env"],
+  "exclude": ["node_modules", "build"]
 }

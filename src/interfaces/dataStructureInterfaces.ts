@@ -19,3 +19,9 @@ export interface EmployeeBasedProject {
   dateFrom: Date;
   dateTo: Date;
 }
+export interface csvDataStructure {
+  projectID: number;
+  empID: number;
+  dateFrom: Date;
+  dateTo: Date;
+}

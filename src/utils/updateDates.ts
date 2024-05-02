@@ -1,5 +1,5 @@
 import { ProjectBased } from '@/interfaces/dataStructureInterfaces';
-import { ProjectDTO } from '@/interfaces/projectInterface';
+import { ProjectDTO } from '@/interfaces/dtos/projectDTO';
 
 export default function updateDates(projects: ProjectDTO[]) {
   return projects.map((p) => ({

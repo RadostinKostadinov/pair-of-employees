@@ -1,4 +1,4 @@
-import { ProjectDTO } from '@/interfaces/projectInterface';
+import { ProjectDTO } from '@/interfaces/dtos/projectDTO';
 import { projectBasedLongestDuration } from '@/types/search';
 import calculateDuration from '@/utils/calculateDuration';
 

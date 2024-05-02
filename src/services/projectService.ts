@@ -1,10 +1,13 @@
-import { Service } from 'typedi';
+import Container, { Service } from 'typedi';
 
-import { ProjectDTO } from '@/interfaces/projectInterface';
+import { ProjectDTO } from '@/interfaces/dtos/projectDTO';
+import { EmployeeService } from './employeeService';
 
 @Service()
 export class ProjectService {
   private projects: ProjectDTO[] = [];
+
+  private employeeServiceI = Container.get(EmployeeService);
 
   getAll() {
     return this.projects;
@@ -27,7 +30,21 @@ export class ProjectService {
       throw new Error(`Project with ID ${project.projectID} already exists`);
     }
 
-    // TODO: Update Employees
+    // Update employees
+    project.workingTimes.forEach((pwt) => {
+      try {
+        this.employeeServiceI.assignEmployeeToProject(
+          pwt.empID,
+          project.projectID
+        );
+      } catch (error) {
+        this.employeeServiceI.create({
+          empID: pwt.empID,
+          projects: [project.projectID],
+        });
+      }
+    });
+
     this.projects.push(project);
   }
 
@@ -38,7 +55,7 @@ export class ProjectService {
       throw new Error(`Project with ID ${id} does not exist`);
     }
 
-    // TODO: Update Employees
+    // TODO: Update employees
     Object.assign(selectedProject, project);
   }
 

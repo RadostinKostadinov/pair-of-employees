@@ -4,16 +4,8 @@ export type projectBasedLongestDuration = {
   project: number;
 };
 
-export type employeesBasedLongestDuration = {
+export type employeeBasedLongestDuration = {
   employees: number[];
   duration: number;
   projects: number[];
-};
-
-// csv-like, data structure
-export type rowDataStructure = {
-  projectID: number;
-  empID: number;
-  dateFrom: Date;
-  dateTo: Date;
 };

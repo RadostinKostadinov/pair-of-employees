@@ -2,7 +2,7 @@ import Container, { Service } from 'typedi';
 import csvParser from 'csv-parser';
 import fs from 'fs';
 import path from 'path';
-import { ProjectDTO } from '@/interfaces/projectInterface';
+import { ProjectDTO } from '@/interfaces/dtos/projectDTO';
 import { ProjectService } from './projectService';
 
 @Service()
