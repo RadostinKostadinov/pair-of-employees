@@ -5,6 +5,9 @@ services:
       context: ./
       dockerfile: Dockerfile
     env_file: ./.env
+    environment:
+      - JWT_SECRET_KEY=jwt_secret_key_super_secret
+      - USERS_PASSWORD_SALT = jwt_password_salt_super_secret
     ports:
       - '3000:3000'
     volumes:
